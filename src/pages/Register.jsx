@@ -6,7 +6,7 @@ import { requestRegisterThunk } from 'redux/authSlice';
 const Register = () => {
   const dispatch = useDispatch();
 
-  const handleSubmit = e => {
+  const handleSignup = e => {
     e.preventDefault();
     const name = e.currentTarget.elements.name.value;
     const email = e.currentTarget.elements.email.value;
@@ -16,7 +16,7 @@ const Register = () => {
   return (
     <div className={styles.container}>
       <h1>Sign-up</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
+      <form className={styles.form} onSubmit={handleSignup}>
         <label>Name</label>
         <input type="text" name="name" required />
         <label>Email</label>
