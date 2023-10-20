@@ -38,7 +38,28 @@ export const requestLoginThunk = createAsyncThunk(
     }
   }
 );
-
+export const requestAutoLoginThunk = createAsyncThunk(
+  'auth/autoLogin',
+  async (_, thunkAPI) => {
+    try {
+      const token = thunkAPI.getState().auth.token;
+      setToken(token);
+      const { data } = await $instance.get('/users/current');
+      return data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  },
+  {
+    condition: (_, thunkAPI) => {
+      const token = thunkAPI.getState().auth.token;
+      if (token) {
+        return true;
+      }
+      return false;
+    },
+  }
+);
 const initialState = {
   token: null,
   userData: null,
@@ -90,6 +111,19 @@ const authSlice = createSlice({
         state.userData = action.payload.user;
       })
       .addCase(requestLoginThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(requestAutoLoginThunk.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(requestAutoLoginThunk.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.isSignedIn = true;
+        state.userData = action.payload;
+      })
+      .addCase(requestAutoLoginThunk.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),

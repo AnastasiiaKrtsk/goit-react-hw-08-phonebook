@@ -4,8 +4,17 @@ import Home from 'pages/Home';
 import Contacts from 'pages/Contacts';
 import Login from 'pages/Login';
 import Register from 'pages/Register';
+import NotFound from 'pages/NotFound';
+import { useEffect } from 'react';
+import { requestAutoLoginThunk } from 'redux/authSlice';
+import { useDispatch } from 'react-redux';
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(requestAutoLoginThunk());
+  }, [dispatch]);
+
   return (
     <div>
       <header>
@@ -21,6 +30,7 @@ function App() {
             <Route path="/contacts" element={<Contacts />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="*" element={<NotFound />} />
           </Routes>
         </main>
       </header>
