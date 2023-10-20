@@ -1,0 +1,25 @@
+/* Define your CSS classes here */
+.nav {
+  background-color: #333;
+  color: white;
+  display: flex;
+  padding: 10px;
+}
+
+.navLink {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  margin-right: 20px;
+}
+
+/* Style the active link differently */
+.navLinkActive {
+  font-weight: bold;
+}
+
+/* Style for a disabled link */
+.navLinkDisabled {
+  color: #999;
+  pointer-events: none;
+}

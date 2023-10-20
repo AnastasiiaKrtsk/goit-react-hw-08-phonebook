@@ -1,8 +1,7 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { requestLoginThunk } from 'redux/authSlice';
+import { LogIn } from 'redux/authThunks';
 import styles from './Login.module.css';
-
 const Login = () => {
   const dispatch = useDispatch();
 
@@ -12,7 +11,7 @@ const Login = () => {
     const password = e.currentTarget.elements.password.value;
 
     try {
-      await dispatch(requestLoginThunk({ email, password })).unwrap();
+      await dispatch(LogIn({ email, password })).unwrap();
       e.currentTarget.reset();
     } catch (error) {
       console.error('Login failed:', error);

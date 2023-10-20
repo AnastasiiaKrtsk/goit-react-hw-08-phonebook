@@ -8,6 +8,13 @@ const $instance = axios.create({
 
 //* https body request, headers, method, url, params
 //* post get put patch
+export const selectIsLoggedIn = state => state.auth.isLoggedIn;
+
+export const selectUser = state => state.auth.user;
+
+export const selectEmail = state => state.auth.email;
+
+export const selectIsRefreshing = state => state.auth.isRefreshing;
 
 export const setToken = token => {
   $instance.defaults.headers.common.Authorization = `Bearer ${token}`;
