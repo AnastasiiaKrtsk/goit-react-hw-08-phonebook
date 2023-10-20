@@ -1,0 +1,26 @@
+/* UserMenu.module.css */
+.userMenuContainer {
+  display: flex;
+  gap: 10px;
+}
+
+.userEmail {
+  font-weight: normal;
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+  border-radius: 5px;
+  border: none;
+  padding: 10px;
+}
+
+.logoutButton {
+  margin: 0px;
+  background-color: #ee0979;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+p {
+  margin: 0;
+}

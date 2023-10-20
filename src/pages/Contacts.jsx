@@ -6,7 +6,7 @@ import {
   fetchContacts,
   updateFilter,
 } from '../redux/contactsSlice';
-
+import styles from './Contacts.module.css';
 // import { nanoid } from 'nanoid';
 import ContactForm from '../components/ContactForm/ContactForm';
 import ContactList from '../components/ContactList/ContactList';
@@ -32,12 +32,16 @@ const Contacts = () => {
   };
 
   return (
-    <div>
-      <h1>Phonebook</h1>
+    <div className={styles.section}>
       <ContactForm onAddContact={handleAddContact} />
-      <div>
-        <p>Find post</p>
-        <input onChange={onFilterChange} value={filter} type="text" />
+      <div className={styles.div}>
+        <h1>Find post</h1>
+        <input
+          className={styles.input}
+          onChange={onFilterChange}
+          value={filter}
+          type="text"
+        />
       </div>
       <h2>Contacts</h2>
       <ContactList onDeleteContact={onDeleteContact} />

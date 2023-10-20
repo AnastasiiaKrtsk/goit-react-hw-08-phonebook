@@ -1,6 +1,8 @@
 .contacts-list {
+  display: flex;
+  flex-direction: column;
   width: 500px;
-  margin: 0 10px;
+  margin: 0 50px;
   list-style: none;
   padding: 0;
 }
@@ -13,6 +15,11 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  background: linear-gradient(
+    135deg,
+    #68dab0,
+    #d0f87a
+  ); /* Gradient background */
 }
 
 .contact-details {
@@ -22,6 +29,7 @@
 .delete-button {
   background-color: #ff6347;
   color: white;
+  width: 100px;
   border: none;
   border-radius: 5px;
   padding: 5px 10px;

@@ -33,6 +33,7 @@ function ContactForm({ onAddContact }) {
   return (
     <section>
       <form onSubmit={onSubmit} className={styles.formStyle}>
+        <h1>Phonebook</h1>
         <input
           type="text"
           name="name"

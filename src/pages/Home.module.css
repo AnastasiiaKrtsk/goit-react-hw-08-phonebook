@@ -1,0 +1,17 @@
+/* Home.module.css */
+.homepage {
+  background: linear-gradient(135deg, #00aaff, #ff00aa);
+  color: white;
+  text-align: center;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2rem;
+}

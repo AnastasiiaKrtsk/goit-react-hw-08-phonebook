@@ -1,8 +1,15 @@
 .formStyle {
-  width: 200px;
-  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
-
+section {
+  display: flex;
+  justify-content: center;
+  padding: 50px;
+  background: linear-gradient(135deg, #0077b6, #00b4d8, #90e0ef);
+}
 .inputStyle {
   width: 100%;
   padding: 10px;
@@ -15,6 +22,7 @@
 .buttonStyle {
   background-color: #007bff;
   color: white;
+  width: 150px;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
