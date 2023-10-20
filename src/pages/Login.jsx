@@ -12,7 +12,7 @@ const Login = () => {
 
     try {
       await dispatch(LogIn({ email, password })).unwrap();
-      e.currentTarget.reset();
+      // e.currentTarget.reset();
     } catch (error) {
       console.error('Login failed:', error);
     }

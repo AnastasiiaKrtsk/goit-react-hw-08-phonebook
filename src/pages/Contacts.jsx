@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   addContacts,
-  deleteContact,
+  deleteContacts,
   fetchContacts,
   updateFilter,
 } from '../redux/contactsSlice';
@@ -13,28 +13,23 @@ import ContactList from '../components/ContactList/ContactList';
 
 const Contacts = () => {
   const dispatch = useDispatch();
-  const contacts = useSelector(state => state.contacts.items);
   const filter = useSelector(state => state.contacts.filter);
 
   useEffect(() => {
     dispatch(fetchContacts());
   }, [dispatch]);
 
-  const handleAddContact = (name, phone) => {
-    dispatch(addContacts({ name, phone }));
+  const handleAddContact = (name, number) => {
+    dispatch(addContacts({ name, number }));
   };
 
   const onDeleteContact = id => {
-    dispatch(deleteContact(id));
+    dispatch(deleteContacts(id));
   };
 
   const onFilterChange = e => {
     dispatch(updateFilter(e.target.value));
   };
-
-  const filteredContacts = contacts.filter(contact => {
-    return contact.name.toLowerCase().includes(filter.toLowerCase());
-  });
 
   return (
     <div>
@@ -45,10 +40,7 @@ const Contacts = () => {
         <input onChange={onFilterChange} value={filter} type="text" />
       </div>
       <h2>Contacts</h2>
-      <ContactList
-        contacts={filteredContacts}
-        onDeleteContact={onDeleteContact}
-      />
+      <ContactList onDeleteContact={onDeleteContact} />
     </div>
   );
 };

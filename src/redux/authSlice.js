@@ -1,18 +1,19 @@
 import axios from 'axios';
+import { LogOut } from './authThunks';
 
 const { createSlice, createAsyncThunk } = require('@reduxjs/toolkit');
 
-const $instance = axios.create({
+export const $instance = axios.create({
   baseURL: 'https://connections-api.herokuapp.com',
 });
 
 //* https body request, headers, method, url, params
 //* post get put patch
-export const selectIsLoggedIn = state => state.auth.isLoggedIn;
+export const selectIsLoggedIn = state => state.auth.isLogedIn;
 
 export const selectUser = state => state.auth.user;
 
-export const selectEmail = state => state.auth.email;
+export const selectEmail = state => state.auth.userData?.email;
 
 export const selectIsRefreshing = state => state.auth.isRefreshing;
 
@@ -72,25 +73,13 @@ const initialState = {
   userData: null,
   isLoading: false,
   error: null,
-  isSignedIn: false,
+  isLogedIn: false,
+  isRefreshing: false,
 };
 
 const authSlice = createSlice({
   name: 'auth',
   initialState,
-  reducers: {
-    loginUser: (state, action) => {
-      state.token = action.payload.token;
-      state.userData = action.payload.userData;
-      state.isSignedIn = true;
-    },
-
-    logoutUser: state => {
-      state.token = null;
-      state.userData = null;
-      state.isSignedIn = false;
-    },
-  },
   extraReducers: builder =>
     builder
       .addCase(requestRegisterThunk.pending, state => {
@@ -99,7 +88,7 @@ const authSlice = createSlice({
       })
       .addCase(requestRegisterThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSignedIn = true;
+        state.isLogedIn = true;
         state.token = action.payload.token;
         state.userData = action.payload.user;
       })
@@ -113,7 +102,7 @@ const authSlice = createSlice({
       })
       .addCase(requestLoginThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSignedIn = true;
+        state.isLogedIn = true;
         state.token = action.payload.token;
         state.userData = action.payload.user;
       })
@@ -127,10 +116,21 @@ const authSlice = createSlice({
       })
       .addCase(requestAutoLoginThunk.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isSignedIn = true;
+        state.isLogedIn = true;
         state.userData = action.payload;
       })
       .addCase(requestAutoLoginThunk.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(LogOut.pending, state => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(LogOut.fulfilled, (state, action) => {
+        return initialState;
+      })
+      .addCase(LogOut.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       }),
